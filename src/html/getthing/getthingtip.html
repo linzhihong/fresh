@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>取物</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="type" content="app">		
+		<link rel="stylesheet" type="text/css" href="../../component/css/mui.min.css"/>
+		<link rel="stylesheet" type="text/css" href="../../component/css/component.css"/>
+		<link rel="stylesheet" type="text/css" href="../../css/common.css"/>
+		<link rel="stylesheet" href="../../css/getthing/getthingtip.css" />
+	</head>
+	<body>
+		<div class="mui-content">
+			<div class="mui-scroll-wrapper">
+            	<div class="mui-scroll" style="padding:20px 18px;text-align: center;">	
+					<p id="pd"></p>
+					<button class="mui-btn" onclick="confirm()">确定,我要取出所有物品</button>
+					<button class="mui-btn" onclick="System.openWindow(openWinPath+'/html/midwayopen/midwayopen.html');">点错了,我只要取出部分物品</button>
+					<button class="mui-btn mui-action-back">取消</button>
+				</div>
+			</div>
+		</div>
+
+		<div id="dialog" class="animated bounceInDown d-layer">
+			<div class="dialog">
+				<p id="pd1"></p>
+				<span>注:关好柜门后,本次订单结束,系统停止计费</span>
+				<div class="mui-text-center">
+					<button class="mui-btn" onclick="closediv()">确定<span class="countdown"></span></button>
+				</div>
+		   </div>
+		</div>
+		
+		<div id="page" class="child-page">
+			<div class="mui-content">
+				<div class="mui-scroll-wrapper">
+	            	<div class="mui-scroll" style="padding:20px 18px;">	
+						<p>尊敬的用户:</p>
+						<p>您的钱包总额少于(备用金10元+实际消费），请充值后继续存物</p>
+						<span>注:备用金用于钱包可用余额不够实际消费时的系统扣费</span>
+						<div class="mui-row mui-text-center" style="margin-top: 5px;">
+							<div class="mui-col-xs-6">
+								<button class="mui-btn btn1" onclick="System.openWindow(openWinPath+'/html/mywallet/mywallet.html')">确定</button>
+							</div>
+							<div class="mui-col-xs-6">
+								<button class="mui-btn" onclick="System.closeDivPage('#'+$(this).parents('.child-page').attr('id'))">取消</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script>document.writeln('<script type="text/javascript" id="componentJs" src="./../../component/component2.0.js" ><\/script>');</script>
+	<script type="text/javascript" src="../../js/getthing/getthingtip.js"></script>
+</html>

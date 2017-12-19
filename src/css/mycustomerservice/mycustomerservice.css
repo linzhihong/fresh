@@ -1,0 +1,63 @@
+body{
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	background-color:#ffffff;
+}
+.mui-bar{
+	background: #333333;
+	height:45px;
+	line-height: 45px;
+}
+.mui-bar-nav.mui-bar .mui-icon{
+	padding-left: 0px;
+}
+.mui-bar-nav a{
+	color: #FFFFFF;
+	font-size: 14px;
+}
+.mui-title{
+	color: #FFFFFF;
+	line-height: 45px;
+	font-size: 16px;
+	font-weight: bold;
+}
+.mui-content{
+	background-color: #ffffff;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+}
+/*.mui-content .personal{
+	width: 100%;
+}
+.mui-content .personal img{
+	width: 100%;
+	height: auto;
+}*/
+/*联系客服*/
+.mui-content .contact{
+	margin:20px 0px 0px 20px;
+}
+.order_title{
+	font-size: 17px;
+	color: #333333;
+}
+hr{
+	margin: 5px 0px;
+	border: 0.5px solid #FE9560;
+}
+.mui-content .contact ul{
+	list-style: none;
+	width: 100%;
+	height: 100px;
+	overflow: auto;
+}
+.mui-content .contact ul li{
+	font-size: 13px;
+	color: #595757;
+	padding: 5px 0px;
+	border-bottom: 0.5px solid #CCCCCC;
+}

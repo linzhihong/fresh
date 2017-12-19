@@ -1,0 +1,156 @@
+body{
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	background-color:#ffffff;
+}
+.mui-bar{
+	background: #333333;
+	height:45px;
+	line-height: 45px;
+}
+.mui-bar-nav.mui-bar .mui-icon{
+	padding-left: 0px;
+}
+.mui-bar-nav a{
+	color: #FFFFFF;
+	font-size: 14px;
+}
+.mui-title{
+	color: #FE9560;
+	line-height: 50px;
+	font-size: 16px;
+	font-weight: bold;
+}
+.mui-content{
+	background-color: #ffffff;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+}
+.mui-content a{
+	text-decoration: none;
+	font-size: 14px;
+	color: #ffffff;
+}
+.mui-content p{
+	font-size: 14px;
+	color: #000000;
+}
+.mui-content input[type="text"]{
+	height: 30px;
+	font-size: 13px;
+	width: 90%;
+}
+.mui-content img{
+	display: none;
+	width: 0px;
+	height: 0px;
+	position: relative;
+	top: 5px;
+	margin-left: 3px;
+}
+.mui-content button{
+	width: 90%;
+	line-height: 16px;
+	font-size: 14px;
+	color: #000000;
+	background: #b6b6b6;
+	border: none;
+}
+
+
+/*弹出框dialog*/
+.d-layer{  
+    position: absolute;
+    top: 0px; 
+    left: 0px; 
+    bottom: 0px; 
+    right: 0px; 
+    background: rgba(0,0,0,.5);
+    display: none;
+}
+.dialog{  
+    position: absolute;  
+    background: #FFFFFF;
+    width: 72%;
+    height: 150px;
+    top: 35%;
+    left: 14%;
+    padding: 15px;
+}
+.dialog p{
+	font-size: 14px;
+	color: #000000;
+	margin-bottom: 0px;
+}
+.dialog span{
+	font-size: 12px;
+	color: #ff6600;
+}
+.dialog .countdown{
+	color: #333333;
+}
+.dialog button{
+	width: 100%;
+	line-height: 20px;
+	font-size: 14px;
+	background: #b5b5b6;
+	border:none;
+}
+/*dialog1*/
+.dialog1{  
+    position: absolute;  
+    background: #FFFFFF;
+    width: 72%;
+    height: 130px;
+    top: 35%;
+    left: 14%;
+    padding: 15px;
+}
+.dialog1 p{
+	font-size: 14px;
+	color: #000000;
+	margin-bottom: 0px;
+}
+.dialog1 button{
+	width: 90%;
+	line-height: 16px;
+	font-size: 14px;
+	color: #000000;
+	background: #b6b6b6;
+	border: none;
+	margin-top: 10px;
+}
+/*dialog2*/
+.dialog2{  
+    position: absolute;  
+    background: #FFFFFF;
+    width: 72%;
+    height: 110px;
+    top: 35%;
+    left: 14%;
+    padding: 15px;
+}
+.dialog2 p{
+	font-size: 14px;
+	color: #000000;
+	margin-bottom: 0px;
+}
+.dialog2 span{
+	font-size: 12px;
+	color: #ff6600;
+}
+.dialog2 .countdown{
+	color: #333333;
+}
+.dialog2 button{
+	width: 100%;
+	line-height: 20px;
+	font-size: 14px;
+	background: #b5b5b6;
+	border:none;
+	margin-top: 10px;
+}

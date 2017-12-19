@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>我的钱包</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="type" content="app">
+		<link rel="stylesheet" type="text/css" href="../../component/css/mui.min.css"/>
+		<link rel="stylesheet" type="text/css" href="../../component/css/component.css"/>
+		<link rel="stylesheet" type="text/css" href="../../css/common.css"/>
+		<link rel="stylesheet" href="../../css/mywallet/mywallet.css" />
+	</head>
+	<body>
+		<div class="mui-content">
+			<div class="mui-scroll-wrapper">
+	            <div class="mui-scroll">
+	            	<div class="balance_bg">
+	            		<div class="details"><a onclick="System.openWindow(openWinPath+'/html/financialdetails/financialdetails.html')">资金明细</a></div>
+	            		<div class="number mui-text-center" id="balance"></div>
+	            		<div class="present mui-text-center">当前可用余额(元)</div>
+	            	</div>
+	            	<div class="mui-row mui-text-center">
+	            		<div class="mui-col-xs-5">
+	            			<div class="row_number" id="reserveBalance"></div>
+	            			<div class="row_present">备用金(元)</div>
+	            		</div>
+	            		<div class="mui-col-xs-2">
+	            			<div class="line"></div>
+	            		</div>
+	            		<div class="mui-col-xs-5">
+	            			<div class="row_donate" id="giveTime"></div>
+	            			<div class="row_present">赠送余额(小时)</div>
+	            		</div>
+	            	</div>
+	            	<div style="width: 100%;height: 1px;background: #c7c7c7;"></div>
+	            	<div class="mui-row mui-text-center" style="margin: 20px 10px 5px 10px;">
+	            		<div class="mui-col-xs-6">
+	            			<button class="mui-btn" onclick="System.openWindow(openWinPath+'/html/recharge/recharge.html')">充值</button>
+	            		</div>	
+	            		<div class="mui-col-xs-6">
+	            			<button class="mui-btn" onclick="showdg()">将余额转送给他人</button>
+	            		</div>	
+	            	</div>
+	            	<p>注：为了保护资金安全，本系统无退款功能，如用户要停止使用本系统提供的冷藏保鲜服务，可将钱包余额转送给你的小伙伴，我们竭诚为你和你的小伙伴提供最优质的服务。点击“充值”即视为同意本条款。</p>
+	            </div>
+	       </div>	        
+		</div>
+		<div id="dialog" class="animated bounceInDown d-layer">
+			<div class="dialog">
+				<p id="pd"></p>
+				<p>确定要转送给朋友吗？</p>
+				<span>注:转送钱包总额后,所有赠送余额将清零!</span>
+				<div class="mui-row mui-text-center" style="margin-top: 8px;">
+					<div class="mui-col-xs-6">
+						<button class="mui-btn" onclick="System.openWindow(openWinPath+'/html/transfer/transfer.html')">确定</button>
+					</div>
+					<div class="mui-col-xs-6">
+						<button class="mui-btn" onclick="closediv()">取消</button>
+					</div>
+				</div>				
+		   </div>
+		</div>
+		<div id="dialog1" class="animated bounceInDown d-layer">
+			<div class="dialog1 mui-text-center">				
+				<p>当前余额为0,</p>
+				<p>无法转送</p>
+				<button class="mui-btn" onclick="closediv()">确定<span class="countdown"></span></button>
+		   </div>
+		</div>
+	</body>
+	<script>document.writeln('<script type="text/javascript" id="componentJs" src="./../../component/component2.0.js" ><\/script>');</script>
+	<script type="text/javascript" src="../../js/mywallet/mywallet.js" ></script>
+</html>

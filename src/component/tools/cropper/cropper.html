@@ -1,0 +1,696 @@
+<!doctype html>
+<html>
+<head>
+    <base id="basePath" href="../../" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>图片截取</title>
+	<script>document.writeln('<script type="text/javascript" src="js/app3.0.js?'+new Date().getTime()+'" ><\/script>');</script>
+    <!--<script>document.writeln('<script type="text/javascript" src="js/tools/cropper/exif.js?'+new Date().getTime()+'" ><\/script>');</script>-->
+    <link rel="stylesheet" href="tools/cropper/cropper.css">
+    <link rel="stylesheet" href="tools/cropper/covered.css" />
+</head>
+<style>
+    html,body{
+		height:100%;
+	}
+    body{
+        text-align: center;padding: 0px;  background: #ffffff;opacity: 1;
+    }
+    .cropper-box{width:100%;}
+    .cropper-box img{width:100%;}
+    .cropper-box,.cropper-box-preview{
+        margin: 0 auto;
+        overflow: hidden;
+    }
+    .cropper-btn{
+        position: relative;
+    }
+    .cropper-container{background: #cccccc;}
+    .cropper-btn{
+        -webkit-border-radius: 0px;
+        -moz-border-radius: 0px;
+        -ms-border-radius: 0px;
+        -o-border-radius: 0px;
+        border-radius: 0px;
+    }
+    .cropper-btn input{
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        opacity: 0;
+    }
+    .closeBtn{
+        position: absolute;
+        z-index: 3;
+        right: 15px;
+        top: 15px;
+        border: 0;
+        padding: 0;
+        background: none;
+        color:#ffffff;
+        line-height: 14px;
+    }
+    .control{
+    	position: fixed;
+    	left: 0;
+    	bottom: 0;
+    	width: 100%;
+    	background: #ffffff;
+    	height: 45px;
+    	z-index: 2;
+    }
+    .btn1,.btn2{
+    	display: block;
+    	float: left;
+    	width: 100%;
+    	height: 100%;
+    	padding: 0;
+	    font-size: 16px;
+	    border: 0;
+	    height: 50px;
+	    line-height: 50px;
+    }
+    .btn2{
+    	filter: progid:DXImageTransform.Microsoft.gradient(GradientType = 1, startColorstr = '#fccc33', endColorstr = '#ff7c02');
+	    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType = 1, startColorstr = '#fccc33', endColorstr = '#ff7c02')";
+	    background-image: -moz-linear-gradient(left, #fccc33, #ff7c02);
+	    background-image: -ms-linear-gradient(left, #fccc33, #ff7c02);
+	    background-image: -o-linear-gradient(left, #fccc33, #ff7c02);
+	    background-image: -webkit-gradient(linear, left top, right top, from(#fccc33), to(#ff7c02));
+	    background-image: -webkit-linear-gradient(left, #fccc33, #ff7c02);
+	    background-image: linear-gradient(left, #fccc33, #ff7c02);
+	    color: #ffffff;
+    }
+    .cropper-box-preview{
+    	position: absolute;
+    	left: 10px;
+    	top: 10px;
+        -webkit-border-radius: 100%;
+        -moz-border-radius:100%;
+        -ms-border-radius: 100%;
+        -o-border-radius: 100%;
+        border-radius: 100%;
+    }
+    
+    button:active{
+    	background: none;
+    }
+    
+    .chexiaoBtn,.saveBtn,.closeBtn2{
+		position: absolute;
+        z-index: 3;
+        top: 15px;
+        border: 0;
+        padding: 0;
+        background: none;
+        color:#333333;
+        font-size: 16px;
+        line-height: 14px;
+	}
+	.chexiaoBtn{
+		right: 40px;
+	}
+	.saveBtn{
+		top: auto;
+		bottom: 15px;
+        right: 15px;
+	}
+	.closeBtn2{
+		left: 15px;
+	}
+</style>
+<body ontouchmove="return false;">
+<div id="cropPanel" class="cropPanel" style="display: none;">
+	<button class="closeBtn" type="button" onclick="closeCrop()"><i class="mui-icon mui-icon-closeempty"></i>取消</button>
+    <div class="cropper-box"><img id="image" src="" /></div>
+    <div id="cropper-box-preview" class="cropper-box-preview" style="width: 50px;height: 50px;"><div class="preview" ></div></div>
+    <div class="control">
+        <!--<button type="button" class="cropper-btn btn btn1" >重新选择<input type="file" id="inputImage" name="file" accept="image/*"></button>-->
+        <button type="button" class="cropper-btn btn btn2" onclick="saveImg()" >完成</button>
+    </div>
+</div>
+
+
+<div id="coverPanel" style="opacity:0;z-index:-1;position: fixed;left:0;top:0;right:0;bottom:0;border:0;width: 100%;height: 100%;background: #ffffff;">
+	<button id="revocation" class="chexiaoBtn" type="button" ><i class="mui-icon mui-icon-undo"></i>撤销</button>
+	<div class="control" style="z-index: 999;">
+		<button id="imgurl" class="cropper-btn btn btn2" type="button" ><!--<i class="mui-icon mui-icon-checkmarkempty"></i>-->保存</button>
+	</div>
+	<button class="closeBtn2" type="button" onclick="coverPanelhide()"><i class="mui-icon mui-icon-closeempty"></i>取消</button>
+	<img src="image/3.0/huabi.png" style="width: 24px;height: 24px;position: absolute;right: 15px;top: 13px;z-index: 3;" />
+	<div class="kePublic">
+		<!--效果html开始-->
+		<div class="fa">
+		   <div class="top">
+		   	<button style="display: none;" type="button" class="takeBtn">拍照<input type="file" accept="image/*" id="fileImg"  /></button>
+		    <div id="color" style="display: none;">
+		       <input class="i1" type="button" value="">
+		       <input class="i2" type="button" value="">
+		       <input class="i3" type="button" value="">
+		       <!--<input class="i4" type="button" value="">
+		       <input class="i5" type="button" value="">
+		       <input class="i6" type="button" value="">
+		       <input class="i7" type="button" value="">
+		       <input class="i8" type="button" value="">
+		       <input class="i9" type="button" value="">-->
+		    </div>
+		    <div class="font" style="display: none;" id="font"> 请选择画笔的宽度：<br />
+		       <input type="button" value="细">
+		       <input type="button" value="中" class="grea">
+		       <input type="button" value="粗">
+		     </div>
+		    <div class="eraser" style="display: none;"> <span id="error">如果有错误，请使用橡皮擦：</span>
+		       <input id="eraser" type="button" value="橡皮擦">
+		    </div>
+		     
+		    <input id="clear" style="display: none;" type="button" value="清除画布" >
+		  </div>
+		   <div id="canvasPanel" class="canvasPanel" >
+		   	<canvas id="canvas" width="300" height="300">您的浏览器不支持 canvas 标签</canvas>
+		   	<canvas id="imgCanvas" width="300" height="300">您的浏览器不支持 canvas 标签</canvas>
+		   </div>
+		   <div id="div1"></div>
+		 </div>
+		<div id="html" class="html" ></div>
+		<div class="loading"><div class="loadingc">图片处理中,请稍后。。。</div></div>
+		</div>
+</div>
+</body>
+<script src="tools/cropper/cropper.min.js"></script>
+<script>
+    var _par = window.location.search.split('?')[1];
+    var _pars = _par.split('&');
+    var _key = {};
+    for(var i = 0 ; i < _pars.length ; i ++){
+        var _k = _pars[i].split('=')[0];
+        var _v = _pars[i].split('=')[1];
+        _key[_k] = _v;
+    }
+    console.log(_key);
+    
+    window.onload = function(){
+    	$('#cropper-box-preview').css({
+    		borderRadius:_key.previewRadius
+    	})
+    	//document.getElementById('cropper-box-preview').style.borderRadius = _key.previewRadius;
+    }
+
+    function cropInit(){
+        var _cb = $('.cropper-box');
+//      var _cbp = $('.cropper-box-preview');
+//      var _cbw= _cb.width();
+        _cb.height($(window).height()-45);
+//      _cbp.height(_cb.height());
+        var $previews = $('.preview');
+        var $image = $('#image');
+        $image.cropper({
+        	autoCropArea:0.5,
+            aspectRatio: parseFloat(_key.aspectRatio),
+            preview: '.cropper-box-preview',
+            viewMode:2,
+            dragMode:'move',
+            crop: function (e) {
+                var imageData = $(this).cropper('getImageData');
+                var previewAspectRatio = e.width / e.height;
+
+                $previews.each(function () {
+                    var $preview = $(this);
+                    var previewWidth = $preview.width();
+                    var previewHeight = previewWidth / previewAspectRatio;
+                    var imageScaledRatio = e.width / previewWidth;
+
+                    $preview.height(previewHeight).find('img').css({
+                        width: imageData.naturalWidth / imageScaledRatio,
+                        height: imageData.naturalHeight / imageScaledRatio,
+                        marginLeft: -e.x / imageScaledRatio,
+                        marginTop: -e.y / imageScaledRatio
+                    });
+                });
+            }
+        });
+
+        var blobURL;
+        // Import image
+        var $inputImage = $('#inputImage');
+        var URL = window.URL || window.webkitURL;
+		isRotate(_key.blobURL,$image);
+        if(_key.blobURL){
+            $image.one('built.cropper', function () {
+                // Revoke when load complete
+                URL.revokeObjectURL(_key.blobURL);
+                console.log(_key.blobURL);
+            }).cropper('reset').cropper('replace', _key.blobURL);
+            $inputImage.val('');
+            setTimeout(function(){$('body').animate({'opacity':1})},200);
+        }
+
+
+        if (URL) {
+            $inputImage.change(function () {
+                var files = this.files;
+                var file;
+
+                if (!$image.data('cropper')) {
+                    return;
+                }
+
+                if (files && files.length) {
+                    file = files[0];
+
+                    if (/^image\/\w+$/.test(file.type)) {
+                        blobURL = URL.createObjectURL(file);
+                        $image.one('built.cropper', function () {
+                            // Revoke when load complete
+                            URL.revokeObjectURL(blobURL,$image);
+                        }).cropper('reset').cropper('replace', blobURL);
+                        $inputImage.val('');
+                        isRotate(blobURL);
+                    } else {
+                        window.alert('Please choose an image file.');
+                    }
+                }
+            });
+        } else {
+            $inputImage.prop('disabled', true).parent().addClass('disabled');
+        }
+    }
+    $(function () {
+    	if(_key.covered&&_key.covered=='true'){
+	        loadCovered(_key.blobURL);
+       	}else{
+       		$('#cropPanel').show();
+       		cropInit();
+       	}
+    });
+    
+	function isRotate(_blobURL,_dom){
+		var img = new Image();
+		img.src = _blobURL;
+		img.onload = function(){
+			//alert(img.width+'============='+img.height);
+		}
+		
+		//检查设备是否是移动设备
+		if(navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i)){
+			setTimeout(function(){
+				_dom.cropper('viewMode',2);
+			},500)
+		}
+	}
+	
+    function closeCrop(){
+        parent.$(parent.System.id).remove();
+        System.showLoading();
+    }
+
+    //获取截屏图片
+    function saveImg(){
+    	var $image = $('#image');
+		var _canvas = $image.cropper('getCroppedCanvas');
+		var base64URL ='';
+    	if(_key.covered&&_key.covered=='true'){
+    		System.confirm({msg:'是否对图片涂鸦？',title:'龙旺.享家',btn:['不','涂鸦'],callback:function(d){
+				if(d.index==1){
+					System.showLoading();
+					base64URL = _canvas.toDataURL("image/jpeg",_key.quality);
+					loadCovered(base64URL);
+				}else{
+					base64URL = _canvas.toDataURL("image/jpeg",_key.quality);
+					parent.System.cropperCallback(base64URL,_canvas.width,_canvas.height);
+	        		closeCrop();
+				}
+			}});
+    	}else{
+    		base64URL = _canvas.toDataURL("image/jpeg",_key.quality);
+	        parent.System.cropperCallback(base64URL,_canvas.width,_canvas.height);
+	//      $image.cropper('rotate',90);
+        	closeCrop();
+    	}
+    }
+</script>
+<!--以下是涂鸦的代码-->
+<script>
+		var paintData = {
+			strokeStyle:'#FF0000',
+			lineWidth:1,
+			lineJoin:'round'
+		}
+		var pbaseUrl = '';
+//		document.addEventListener('touchmove', function (event) {
+//		    event.preventDefault();
+//		}, false);
+		document.getElementById('canvas').addEventListener('touchmove', function (event) {
+		    event.preventDefault();
+		}, false);
+		(function(){
+		    var paint={
+		        init:function()
+		        {
+		            this.load();
+		        },
+		        load:function()
+		        {   
+		        	this.newCanvasId = 0;
+		            this.x=[];//记录鼠标移动时的X坐标
+		            this.y=[];//记录鼠标移动时的Y坐标
+		            this.clickDrag=[];
+		            this.lock=false;//鼠标移动前，判断鼠标是否按下
+		            this.isEraser=false;
+		            //this.Timer=null;//橡皮擦启动计时器
+		            //this.radius=5;
+		            this.eraserRadius=15;//擦除半径值
+		            this.color=["#FF0000","#000000","#80FF00","#00FFFF","#808080","#FF8000","#408080","#8000FF","#CCCC00"];//画笔颜色值
+		            this.fontWeight=[2,5,8];
+		            this.$=function(id){return typeof id=="string"?document.getElementById(id):id;};
+		            this.canvas=this.$("canvas");
+		            this.imgCanvas=this.$("imgCanvas");
+		            if (this.canvas.getContext) {
+		            } else {
+		                alert("您的浏览器不支持 canvas 标签");
+		                return;
+		            }
+		            this.canvas.width = $('.canvasPanel').width();
+		            this.canvas.height = $('.canvasPanel').height();
+		            this.imgCanvas.width = $('.canvasPanel').width();
+		            this.imgCanvas.height = $('.canvasPanel').height();
+		            this.cxt=this.canvas.getContext('2d');
+		            this.cxt.lineJoin = "round";//context.lineJoin - 指定两条线段的连接方式
+		            this.cxt.lineWidth = 5;//线条的宽度
+		            this.cxt.strokeStyle = this.color[0];
+		            this.iptClear=this.$("clear");
+		            this.revocation=this.$("revocation");
+		            this.imgurl=this.$("imgurl");//图片路径按钮
+		            this.w=this.canvas.width;//取画布的宽
+		            this.h=this.canvas.height;//取画布的高 
+		            this.touch =("createTouch" in document);//判定是否为手持设备
+		            this.StartEvent = this.touch ? "touchstart" : "mousedown";//支持触摸式使用相应的事件替代
+			         this.MoveEvent = this.touch ? "touchmove" : "mousemove";
+			         this.EndEvent = this.touch ? "touchend" : "mouseup";
+			         this.bind();
+		        },
+		        bind:function()
+		        {
+		            var t=this;
+		            /*清除画布*/
+		            this.iptClear.onclick=function()
+		            {
+		                t.clear();
+		            };
+		            /*鼠标按下事件，记录鼠标位置，并绘制，解锁lock，打开mousemove事件*/
+		            this.canvas['on'+t.StartEvent]=function(e)
+		            {   
+		            	e = e || window.event;  
+				        if(e.stopPropagation) { //W3C阻止冒泡方法  
+				            e.stopPropagation();  
+				        } else {  
+				            e.cancelBubble = true; //IE阻止冒泡方法  
+				        } 
+		                var touch=t.touch ? e.touches[0] : e; 
+		                var _x=touch.clientX - touch.target.offsetLeft;//鼠标在画布上的x坐标，以画布左上角为起点
+		                var _y=touch.clientY - touch.target.offsetTop;//鼠标在画布上的y坐标，以画布左上角为起点             
+		                if(t.isEraser)
+		                {
+		                /*
+		                    t.cxt.globalCompositeOperation = "destination-out";
+		                    t.cxt.beginPath();
+		                    t.cxt.arc(_x, _y,t.eraserRadius, 0, Math.PI * 2);
+		                    t.cxt.strokeStyle = "rgba(250,250,250,0)";
+		                    t.cxt.fill();
+		                    t.cxt.globalCompositeOperation = "source-over";
+		                    */
+		                    t.resetEraser(_x,_y,touch);
+		                }else
+		                {
+		                    t.movePoint(_x,_y);//记录鼠标位置
+		                    t.drawPoint();//绘制路线
+		                }
+		                t.lock=true;
+		            };
+		            /*鼠标移动事件*/
+		            this.canvas['on'+t.MoveEvent]=function(e)
+		            {
+		            	e = e || window.event;  
+				        if(e.stopPropagation) { //W3C阻止冒泡方法  
+				            e.stopPropagation();  
+				        } else {  
+				            e.cancelBubble = true; //IE阻止冒泡方法  
+				        } 
+		                var touch=t.touch ? e.touches[0] : e;
+		                if(t.lock)//t.lock为true则执行
+		                {
+		                    var _x=touch.clientX - touch.target.offsetLeft;//鼠标在画布上的x坐标，以画布左上角为起点
+		                    var _y=touch.clientY - touch.target.offsetTop;//鼠标在画布上的y坐标，以画布左上角为起点
+		                    if(t.isEraser)
+		                    {
+		                        //if(t.Timer)clearInterval(t.Timer);
+		                        //t.Timer=setInterval(function(){
+		                            t.resetEraser(_x,_y,touch);
+		                        //},10);
+		                    }
+		                    else
+		                    {
+		                        t.movePoint(_x,_y,true);//记录鼠标位置
+		                        t.drawPoint();//绘制路线
+		                    }
+		                }
+		            };
+		            this.canvas['on'+t.EndEvent]=function(e)
+		            {
+		            	e = e || window.event;  
+				        if(e.stopPropagation) { //W3C阻止冒泡方法  
+				            e.stopPropagation();  
+				        } else {  
+				            e.cancelBubble = true; //IE阻止冒泡方法  
+				        } 
+		                /*重置数据*/
+		                t.lock=false;
+		                t.x=[];
+		                t.y=[];
+		                t.clickDrag=[];
+		                clearInterval(t.Timer);
+		                t.Timer=null;
+		                //创建存储最后一次画布的图案
+						var image = new Image();
+						image.src = t.canvas.toDataURL("image/png");
+		                image.id = t.newCanvasId++;
+		                image.style.display = 'none';
+		                image.setAttribute('name','newCanvasImage');
+		                document.body.appendChild(image);
+		            };
+		            this.revocation.onclick=function()
+		            {
+		                t.redraw();
+		            };
+		            this.changeColor();
+		            this.imgurl.onclick=function()
+		            {
+		                t.getUrl();
+		            };
+		            /*橡皮擦*/
+		            this.$("eraser").onclick=function(e)
+		         {
+		             t.isEraser=true;
+		                t.$("error").style.color="red";
+		                t.$("error").innerHTML="您已使用橡皮擦！";
+		         };
+		        },
+		        movePoint:function(x,y,dragging)
+		        {   
+		            /*将鼠标坐标添加到各自对应的数组里*/
+		            this.x.push(x);
+		            this.y.push(y);
+		            this.clickDrag.push(y);
+		        },
+		        drawPoint:function(x,y,radius)
+		        {
+		        	var can = document.getElementById('canvas');
+		        	var stp = -(document.documentElement.clientHeight-can.height)/2;
+		            for(var i=0; i < this.x.length; i++)//循环数组
+		            {   
+		            	
+		                this.cxt.beginPath();//context.beginPath() , 准备绘制一条路径
+		                
+		                if(this.clickDrag[i] && i){//当是拖动而且i!=0时，从上一个点开始画线。
+		                    this.cxt.moveTo(this.x[i-1], this.y[i-1]+stp);//context.moveTo(x, y) , 新开一个路径，并指定路径的起点
+		                }else{
+		                    this.cxt.moveTo(this.x[i]-1, this.y[i]+stp);
+		                }
+		                
+		                this.cxt.lineTo(this.x[i], this.y[i]+stp);//context.lineTo(x, y) , 将当前点与指定的点用一条笔直的路径连接起来
+		                this.cxt.closePath();//context.closePath() , 如果当前路径是打开的则关闭它
+		                this.cxt.stroke();//context.stroke() , 绘制当前路径
+//		            	this.cxt.restore(); 
+		            }
+		        },
+		        clear:function()
+		        {
+		            
+		        },
+		        redraw:function()
+		        {  
+		            /*撤销*/
+		            var canss = document.getElementsByName('newCanvasImage');
+					if(canss.length==0){
+						this.cxt.clearRect(0, 0, this.w, this.h);//清除画布，左上角为起点
+						return;
+					}
+		            var lastCanvasImage = canss[canss.length-1];
+					lastCanvasImage.parentNode.removeChild(lastCanvasImage);
+					canss = document.getElementsByName('newCanvasImage');
+					if(canss.length==0){
+						this.cxt.lineWidth = paintData.lineWidth;//线条的宽度
+						this.cxt.clearRect(0, 0, this.w, this.h);//清除画布，左上角为起点
+						return;
+					}
+		            lastCanvasImage = canss[canss.length-1];
+					this.canvas.width = lastCanvasImage.width;
+					this.canvas.height = lastCanvasImage.height;
+					this.canvas.getContext("2d").drawImage(lastCanvasImage, 0, 0);
+					this.canvas.getContext('2d').lineWidth = paintData.lineWidth;
+					this.canvas.getContext('2d').lineJoin = paintData.lineJoin;
+					this.canvas.getContext('2d').strokeStyle = paintData.strokeStyle;
+		        },  
+		        preventDefault:function(e){
+		            /*阻止默认*/
+		            var touch=this.touch ? e.touches[0] : e;
+		      if(this.touch)touch.preventDefault();
+		      else window.event.returnValue = false;
+		     },
+		     changeColor:function()
+		     {
+		         /*为按钮添加事件*/
+		         var t=this,iptNum=this.$("color").getElementsByTagName("input"),fontIptNum=this.$("font").getElementsByTagName("input");
+		         for(var i=0,l=iptNum.length;i<l;i++)
+		         {		
+		             iptNum[i].index=i;
+		             iptNum[i].onclick=function()
+		             {
+//		             	t.cxt.save();
+		                 t.cxt.strokeStyle = t.color[this.index];
+		                 t.storageColor=t.color[this.index];
+		                 t.$("error").style.color="#f00";
+		                 t.$("error").innerHTML="如果有错误，请使用橡皮擦：";
+		                 t.cxt.strokeStyle = t.storageColor;
+		                 t.isEraser=false;
+		                 paintData.strokeStyle = t.cxt.strokeStyle;
+		             }
+		         }
+		         for(var i=0,l=fontIptNum.length;i<l;i++)
+		         {
+		             fontIptNum[i].index=i;
+		             fontIptNum[i].onclick=function()
+		             {
+//		             	t.cxt.save();
+		                 t.changeBackground(this.index);
+		                 t.cxt.lineWidth = t.fontWeight[this.index];
+		                 t.$("error").style.color="#f00";
+		                 t.$("error").innerHTML="如果有错误，请使用橡皮擦：";
+		                 t.isEraser=false;
+		                 t.cxt.strokeStyle = t.storageColor;
+		             }
+		         }
+		     },
+		     changeBackground:function(num)
+		     {
+		         /*添加画笔粗细的提示背景颜色切换，灰色为当前*/
+		         var fontIptNum=this.$("font").getElementsByTagName("input");
+		         for(var j=0,m=fontIptNum.length;j<m;j++)
+		            {
+		                fontIptNum[j].className="";
+		                if(j==num) fontIptNum[j].className="grea";
+		            }
+		     },
+		     getUrl:function()
+		     {
+		     		System.showLoading();
+		     		var ncanvas = document.createElement('canvas');
+		     		ncanvas.setAttribute('name','canvas');
+		     		ncanvas.width = this.canvas.width;
+		     		ncanvas.height = this.canvas.height;
+		     		ncanvas.getContext('2d').drawImage(this.imgCanvas,0,0,this.canvas.width,this.canvas.height);
+		     		ncanvas.getContext('2d').drawImage(this.canvas,0,0,this.canvas.width,this.canvas.height);
+		     		var baseUrl = ncanvas.toDataURL("image/jpeg");
+		     		parent.System.cropperCallback(baseUrl,this.canvas.width,this.canvas.height);
+		     		closeCrop();
+		        },
+		        resetEraser:function(_x,_y,touch)
+			     {   
+			         /*使用橡皮擦-提醒*/
+			         var t=this;
+			            //this.cxt.lineWidth = 30;
+			            /*source-over 默认,相交部分由后绘制图形的填充(颜色,渐变,纹理)覆盖,全部浏览器通过*/
+			            t.cxt.globalCompositeOperation = "destination-out";
+			            t.cxt.beginPath();
+			            t.cxt.arc(_x, _y, t.eraserRadius, 0, Math.PI * 2);
+			            t.cxt.strokeStyle = t.color[this.index];
+			            t.cxt.fill();
+			            t.cxt.globalCompositeOperation = "source-over"
+			     } 
+		    };
+		    paint.init();
+		    window.paint = paint;
+		})();
+		
+	    function loadCovered(source,type){
+	    	var paint = window.paint;
+	    	var ww = $(window).width();
+	    	var wh = $(window).height();
+	    	var canvasPanel = $('#canvasPanel');
+	    	var source_img_obj = document.createElement('img');
+    		source_img_obj.src = source;
+			source_img_obj.width = ww;
+        	source_img_obj.onload = function(){
+            	var cvs = document.createElement('canvas');
+            	cvs.width = source_img_obj.width;
+	        	cvs.height = source_img_obj.height;
+            	paint.imgCanvas.width = source_img_obj.width;
+	        	paint.imgCanvas.height = source_img_obj.height;
+	        	paint.canvas.width = source_img_obj.width;
+	        	paint.canvas.height = source_img_obj.height;
+        		cvs.getContext("2d").drawImage(source_img_obj,0, 0 ,source_img_obj.width,source_img_obj.height);
+	           	paint.imgCanvas.getContext("2d").drawImage(source_img_obj, 0, 0 ,source_img_obj.width,source_img_obj.height);
+	           	var newImageData = null;
+	           	if(_key.covered&&_key.covered=='true'){
+	           		newImageData = cvs.toDataURL("image/jpeg",_key.quality);
+	           	}else{
+	           		newImageData = cvs.toDataURL("image/jpeg");
+	           	}
+	        	pbaseUrl = newImageData;
+	        	canvasPanel.css({
+	        		width:source_img_obj.width,
+	        		height:source_img_obj.height,
+	        		top:'50%',
+	        		marginTop:-(source_img_obj.height/2)
+	        	})
+	        	//恢复画布设置值
+	    		paint.canvas.getContext('2d').lineWidth = paintData.lineWidth;
+				paint.canvas.getContext('2d').lineJoin = paintData.lineJoin;
+				paint.canvas.getContext('2d').strokeStyle = paintData.strokeStyle;
+				$('#coverPanel').css({
+					opacity:1,
+					zIndex:999
+				});
+				$('body').css({
+					opacity:1
+				});
+				source_img_obj.parentNode.removeChild(source_img_obj);
+				System.hideLoading();
+    		}
+        	document.body.appendChild(source_img_obj);
+	    }
+	    function coverPanelhide(){
+	    	if(_key.covered&&_key.covered=='true'){
+	    		closeCrop();
+	    	}else{
+		    	$('#coverPanel').css({
+					opacity:0,
+					zIndex:-1
+				});
+	    	}
+	    }
+	</script>
+</html>

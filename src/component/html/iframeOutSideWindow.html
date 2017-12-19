@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="format-detection" content="telephone=no">
+		<script>document.writeln('<script type="text/javascript" id="componentJs" src="../../component/component.js?'+new Date().getTime()+'" ><\/script>');</script>
+    	<style>
+		</style>
+	</head>
+
+	<body >
+		<header id="header" class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-pull-left mui-icon mui-icon-arrowleft "></a>
+			<a onclick="closeWin()" style="display: block;height: 100%;" class="mui-pull-left"><i class="mui-icon mui-icon-closeempty"></i></a>
+			<h1 class="mui-title" id="leHeardTitle">iframeWindow</h1>
+		</header>
+	</body>
+	<script>
+		var ws=null,embed=null;
+		var appReady = function(){
+			mui.init();
+	        mui.back = function() {
+	        	leBack();
+	        }
+       		createEmbed();
+		}
+		// 创建子Webview
+		function createEmbed(){
+			var styles = {
+				top:"45px",
+				bottom:"0px",
+				hardwareAccelerated:true
+			}
+			ws = plus.webview.currentWebview();
+			document.getElementById('leHeardTitle').innerHTML=ws.title;
+//			var topoffset='45px';
+//			if(plus.navigator.isImmersedStatusbar()){// 兼容immersed状态栏模式
+//				topoffset=(Math.round(plus.navigator.getStatusbarHeight())+45)+'px';
+//			}
+			embed=plus.webview.create(ws.url,'iframeWindow',styles);
+			embed.onloading = function(e){
+				
+			}
+			ws.append(embed);
+			embed.show(); // 显示窗口
+		}
+		//后退
+		function leBack(){
+			embed.canBack( function(e){
+				if(e.canBack){
+					embed.back();
+				}else{
+					close(),plus.nativeUI.closeWaiting();
+				}
+			});
+		}
+		
+		//关闭webview
+		function close(){
+			ws.close();
+		}
+		
+		//关闭webview
+		function closeWin(){
+			plus.webview.currentWebview().close();
+		}
+	</script>
+</html>

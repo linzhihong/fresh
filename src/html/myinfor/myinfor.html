@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>我的信息</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="type" content="app">		
+		<link rel="stylesheet" type="text/css" href="../../component/css/mui.min.css"/>
+		<link rel="stylesheet" type="text/css" href="../../component/css/component.css"/>
+		<link rel="stylesheet" type="text/css" href="../../css/common.css"/>
+		<link rel="stylesheet" href="../../css/myinfor/myinfor.css" />
+	</head>
+	<body>
+		<div class="mui-content">
+			<div class="mui-scroll-wrapper">
+	            <div class="mui-scroll">
+	            	<!--<div class="personal">
+	            		<img src="../../img/pubilc/logo.png"/>
+	            	</div>-->
+	            	<div class="personalinfor">
+	            		<div class="order_title">个人信息<a class="update">修改</a></div>
+	            		<hr />
+	            		<ul id="ul">
+	            			<li id="userphone"></li>
+	            		</ul>
+	            		<div id="form">
+		            		<div class="mui-row">
+		            			<span>手机号码</span><input type="tel" name="" id="tel" value="" validate="validateTel" validate-isEmpty="false" />
+		            		</div>
+		            		<div class="mui-row">		            			
+		            			<span>验&nbsp;&nbsp;证&nbsp;&nbsp;码</span><input type="text" maxlength="6" name="" id="yzm" value="" /><button id="hqyzm" class="mui-btn btn1" onclick="getYzm()">获取验证码</button>
+		            		</div>
+		            		<div class="mui-row mui-text-center">
+		            			<button class="mui-btn btn" onclick="reg()">完成修改</button>
+		            		</div>
+		            	</div>
+	            	</div>
+	            	<div class="systeminfo">
+	            		<div class="mui-table-view-cell mui-collapse">
+	            			<a class="order_title mui-navigate-right" href="#">系统信息</a>
+	            			<hr />
+		            		<div class="mui-collapse-content">
+								<ul class="ul1">
+									<script id="myTemplate" component="template" template-type="page" type="text/html">
+									{{ each list as value i }}
+			            			<li template-setting="{}">
+			            				<div class="mui-row">
+			            					<div class="mui-col-xs-2 mui-text-center">
+			            						<img src="../../img/myinfor/systeminfor.png" style="width: 40px;height: 35px;"/>
+			            					</div>
+			            					<div class="mui-col-xs-10">
+			            						{{value.msg}}
+			            					</div>
+			            					<div class="mui-pull-right" style="font-size: 12px;color: #C3C3C3;margin-right: 10px;line-height: 12px;margin-top: 10px;">
+			            						{{value.sendTime}}
+			            					</div>
+			            				</div>
+			            			</li>
+			            			{{/each}}
+        							</script>
+			            		</ul>
+							</div>	 
+	            		</div>	            		           		
+	            	</div>
+	            </div>
+	       </div>	        
+		</div>
+		<!--修改成功弹框-->
+		<div id="dialog" class="animated bounceInDown d-layer">
+			<div class="dialog">
+				<p>信息修改成功！</p>
+				<div class="mui-row mui-text-center" style="margin-top: 15px;">					
+					<button class="mui-btn" onclick="refresh()">确定<span class="countdown"></span></button>
+				</div>				
+		   </div>
+		</div>
+	</body>
+	<script>document.writeln('<script type="text/javascript" id="componentJs" src="./../../component/component2.0.js" ><\/script>');</script>
+	<script type="text/javascript" src="../../js/myinfor/myinfor.js" ></script>
+</html>

@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="type" content="app">
+    <title>vue</title>
+    <script>document.writeln('<script type="text/javascript" src="../../../component/component2.0.js?'+new Date().getTime()+'" ><\/script>');</script>
+</head>
+<body >
+	<header id="header" class="mui-bar mui-bar-nav"> 
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-icon-arrowleft"></a>
+		<a onclick="reload()" class="mui-pull-right mui-icon mui-icon-plus"></a>
+		<h1 class="mui-title"><script>document.write(document.title)</script></h1>
+	</header>
+	<div class="mui-content">
+		<div class="mui-scroll-wrapper" style="top: 45px;">
+			<div class="mui-scroll">
+				<!--数据列表-->
+				<my-list id="app"></my-list>
+			</div>
+		</div>
+	</div>
+</body>
+<script>
+	require.config({
+        paths: {
+            text : BasePath+"/component/js/text"
+        }
+	});
+	
+	var bus = null;
+	System.ready(function(){
+		System.showLoading();
+		require(['vue','text!components/vue-list-template.vue'],function(Vue,template){
+			//空的 Vue 实例作为事件总线
+			bus = new Vue();
+			
+			//注册一个全局组件
+			Vue.component('my-list', {
+				data(){
+					return {
+						list:[]
+					}
+				},
+			  	template: template,
+			  	methods:{
+			  		click(){
+			  			alert();
+			  		},
+			  		loadingData(){
+			  			var _this = this;
+				  		$.ajax({
+							type:"get",
+							dataType:'json',
+							url:"http://zhangyexing.cn/theme_2/demo?currentPage=1",
+							success(data){
+	//							alert(JSON.stringify(data.list));
+								_this.list.push.apply(_this.list,data.list);
+							},
+							error(){},
+							complete(){
+								System.hideLoading();
+							}
+						});
+			  		}
+			  	},
+			  	updated(){
+			  		System.renderJs();
+			  	},
+			  	mounted(){
+			  		var _this = this;
+			  		_this.loadingData();
+			  		bus.$on('loadingData',function(){
+			  			System.showLoading();
+			  			_this.loadingData();
+			  		})
+			  	}
+			})
+			
+			//创建根实例
+			var app = new Vue({
+				el:'#app'
+			})
+		})
+	})
+	
+	function reload(){
+		bus.$emit('loadingData')
+	}
+</script>
+</html>

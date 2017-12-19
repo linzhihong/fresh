@@ -1,0 +1,163 @@
+body{
+	display: none;
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	background-color:#ffffff;
+}
+.mui-bar{
+	background: #333333;
+	height:45px;
+	line-height: 45px;
+}
+.mui-bar-nav.mui-bar .mui-icon{
+	padding-left: 0px;
+}
+.mui-bar-nav a{
+	color: #FFFFFF;
+	font-size: 14px;
+}
+.mui-title{
+	color: #FFFFFF;
+	line-height: 45px;
+	font-size: 16px;
+	font-weight: bold;
+}
+.mui-content{
+	background-color: #ffffff;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+}
+.mui-content a{
+	text-decoration: none;
+	font-size: 14px;
+	color: #ffffff;
+}
+.mui-content .balance_bg{
+	width: 100%;
+	height: 150px;
+	background: #eeefef;
+}
+.mui-content .balance_bg .details{
+	position: absolute;
+	right: 10px;
+	top: 8px;
+}
+.mui-content .balance_bg .details a{
+	font-size: 15px;
+	color: #333333;	
+}
+.mui-content .balance_bg .number{
+	font-size: 50px;
+	color: #e60012;
+	position: relative;
+	top: 55px;
+}
+.mui-content .balance_bg .present{
+	font-size: 15px;
+	color: #333333;	
+	position: relative;
+	top: 70px;
+}
+.mui-content .line{
+	width: 1px;
+	height: 30px;
+	background: #CCCCCC;
+	margin: 20px auto;
+}
+.mui-content .row_number{
+	font-size: 17px;
+	color: #e60012;
+	margin-bottom: 5px;
+}
+.mui-content .row_present{
+	font-size: 12px;
+	color: #333333;	
+}
+.mui-col-xs-5{
+	margin: 15px 0px 5px 0px;
+}
+.mui-content .row_donate{
+	font-size: 17px;
+	color: darkgreen;
+	margin-bottom: 5px;
+}
+.mui-content button{
+	width: 90%;
+    background: #f08300;
+    border: none;
+    font-size: 14px;
+    line-height: 20px;
+    color: #FFFFFF;
+}
+.mui-content p{
+	font-size: 12px;
+	color: #C7C7C7;
+	padding: 0px 20px;
+}
+
+/*弹出框dialog*/
+.d-layer{  
+    position: absolute;
+    top: 0px; 
+    left: 0px; 
+    bottom: 0px; 
+    right: 0px; 
+    background: rgba(0,0,0,.5);
+    display: none;
+}
+.dialog{  
+    position: absolute;  
+    background: #FFFFFF;
+    width: 72%;
+    height: 140px;
+    top: 35%;
+    left: 14%;
+    padding: 15px;
+}
+.dialog p{
+	font-size: 15px;
+	color: #000000;
+	margin-bottom: 0px;
+}
+.dialog span{
+	font-size: 12px;
+	color: #ff6600;
+}
+.dialog button{
+	width: 90%;
+	line-height: 20px;
+	font-size: 14px;
+	background: #b5b5b6;
+	border:none;
+}
+
+/*弹出框dialog1*/
+.dialog1{  
+    position: absolute;  
+    background: #FFFFFF;
+    width: 72%;
+    height: 110px;
+    top: 35%;
+    left: 14%;
+    padding: 15px;
+}
+.dialog1 p{
+	font-size: 17px;
+	color: #000000;
+	margin-bottom: 0px;
+}
+.dialog1 .countdown{
+	color: #333333;
+}
+.dialog1 button{
+	width: 100%;
+	line-height: 20px;
+	font-size: 14px;
+	background: #b5b5b6;
+	border:none;
+	margin-top: 10px;
+}

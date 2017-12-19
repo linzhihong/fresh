@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>取物</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="type" content="app">
+		<link rel="stylesheet" type="text/css" href="../../component/css/mui.min.css"/>
+		<link rel="stylesheet" type="text/css" href="../../component/css/component.css"/>
+		<link rel="stylesheet" type="text/css" href="../../css/common.css"/>
+		<link rel="stylesheet" href="../../css/getthing/getthing.css" />
+	</head>
+	<body>
+		<div class="mui-content">
+			<div class="mui-scroll-wrapper">
+	            <div class="mui-scroll" style="padding: 0px 0px 10px 20px;">		            
+        			<ul class="ul1">
+        				<script id="myTemplate" component="template" template-type="page" type="text/html">
+						{{ each list as value i }}
+        				<li template-setting="{}">
+        					<div class="mui-row">
+        						<div class="mui-col-xs-6 mui-text-left ddn">
+        							当前订单{{i+1}}
+        						</div>
+        						<div class="mui-col-xs-6 mui-text-right">
+        							<button class="mui-btn qwbtn" onclick="System.openWindow(openWinPath+'/html/getthing/getthingtip.html',{index:'{{i+1}}',orderSn:'{{value.orderSn}}',devAddr:'{{value.devAddr}}'})">取物</button>
+        						</div>
+        					</div>
+        					<hr />
+    						<ul class="ul2">
+    							<li>订&nbsp;单&nbsp;&nbsp;号:&nbsp;{{value.orderSn}}</li>
+    							<li>存物网点:&nbsp;{{value.devAddr}}</li>
+								<li>存入时间:&nbsp;{{value.saveTime}}</li>
+								<li>累计时长:&nbsp;{{value.cumulativeTime}}</li>		
+								<li>消费总额:&nbsp;{{value.costPrice}}元</li>
+								<li>待结费用:&nbsp;{{value.remainingCost}}元</li>
+    						</ul>
+        				</li>
+        				{{/each}}
+        				</script>      				
+        			</ul>        			
+	            </div>
+	        </div>
+	        <div class="mui-text-center noscore">
+				<img src="../../img/getthing/noscore.png"/>
+				<p>暂无存物记录</p>
+			</div>
+		</div>
+	</body>
+	<script>document.writeln('<script type="text/javascript" id="componentJs" src="./../../component/component2.0.js" ><\/script>');</script>
+	<script src="../../js/getthing/getthing.js" type="text/javascript"></script>
+</html>

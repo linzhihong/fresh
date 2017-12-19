@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>转送</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="type" content="app">		
+		<link rel="stylesheet" type="text/css" href="../../component/css/mui.min.css"/>
+		<link rel="stylesheet" type="text/css" href="../../component/css/component.css"/>
+		<link rel="stylesheet" type="text/css" href="../../css/common.css"/>
+		<link rel="stylesheet" href="../../css/transfer/transfer.css" />
+	</head>
+	<body>
+		<div class="mui-content">
+			<div class="mui-scroll-wrapper">
+	            <div class="mui-scroll" style="padding: 20px;">		
+	            	<p>将余额转送给</p>
+	            	<input type="text" name="" id="tel" onchange="validateTel(this.value)" value="" placeholder="请输入手机号"/><img id="rightimg" src="../../img/transfer/right.png"/>
+	            	<div class="mui-row">
+	            		<div class="mui-col-xs-6">
+	            			<button class="mui-btn" onclick="showdg()">确定</button>
+	            		</div>
+	            		<div class="mui-col-xs-6">
+	            			<button class="mui-btn" onclick="closediv()">取消</button>           			
+	            		</div>
+	            	</div>
+            	</div>
+            </div>
+		</div>
+		<div id="dialog" class="animated bounceInDown d-layer">
+			<div class="dialog">				
+				<p id="pd"></p>
+				<span>注:转送充值余额后,所有赠送余额将清零!</span>
+				<button class="mui-btn" onclick="System.openWindow(openWinPath+'/html/mywallet/mywallet.html')">确定<span class="countdown"></span></button>
+		   </div>
+		</div>
+		<div id="dialog1" class="animated bounceInDown d-layer">
+			<div class="dialog1">				
+				<p id="pd1"></p>
+				<div class="mui-row">
+            		<div class="mui-col-xs-6">
+            			<button class="mui-btn" onclick="confirmRecommend()">确定</button>
+            		</div>
+            		<div class="mui-col-xs-6">
+            			<button class="mui-btn" onclick="closediv()">取消</button>           			
+            		</div>
+            	</div>
+		   </div>
+		</div>
+		<div id="dialog2" class="animated bounceInDown d-layer">
+			<div class="dialog2">				
+				<p id="pd2"></p>			
+				<button class="mui-btn" onclick="System.openWindow(openWinPath+'/html/mywallet/mywallet.html');">确定<span class="countdown"></span></button>
+		   </div>
+		</div>
+	</body>
+	<script>document.writeln('<script type="text/javascript" id="componentJs" src="./../../component/component2.0.js" ><\/script>');</script>
+	<script type="text/javascript" src="../../js/transfer/transfer.js" ></script>
+</html>

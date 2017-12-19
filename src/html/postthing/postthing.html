@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>存物</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="type" content="app">		
+		<link rel="stylesheet" type="text/css" href="../../component/css/mui.min.css"/>
+		<link rel="stylesheet" type="text/css" href="../../component/css/component.css"/>
+		<link rel="stylesheet" type="text/css" href="../../css/common.css"/>
+		<link rel="stylesheet" type="text/css" href="../../css/postthing/postthing.css" />
+	</head>
+	<body>
+		<div class="mui-content">
+			<div class="mui-scroll-wrapper" style="top:10px;">
+	            <div class="mui-scroll mui-text-center">		            
+            		<!--<ul>
+            			<script id="myTemplate" component="template" template-type="page"  type="text/html">
+						{{ each list as value i }}
+	            			<a template-setting="{}" onclick="showdg(((({{value.boxStatus}}==0)?{{value.boxNum}}:100)),{{value.boxStatus}},{{value.boxGroupId}})"><li style="background: {{value.color}};"><span class="sp1">{{value.title}}</span><div class="sp2">{{value.boxNum}}</div></li></a>
+	            		{{/each}}
+	            		</script>
+            		</ul> 	  -->
+            		<ul>
+            			<a onclick="showdg()"><li>1</li></a>
+            			<li>2</li>
+            			<li>131</li>
+            			<li>3</li>
+            			<li>1</li>
+            		</ul> 
+	            	<div class="clear"></div>
+            		<p>请点击绿色区域选择处于"闲置"状态的小柜</p>	                		
+	            </div>
+	        </div>
+		</div>
+		<!--确定箱格  弹框-->
+		<div id="dialog" class="animated bounceInDown d-layer">
+			<div class="dialog">
+				<p id="pd"></p>
+				<div class="mui-row mui-text-center" style="margin-top: 20px;">
+					<div class="mui-col-xs-6">
+						<button class="mui-btn" onclick="confirm()">确定</button>
+					</div>
+					<div class="mui-col-xs-6">
+						<button class="mui-btn" onclick="closediv()">取消</button>
+					</div>
+				</div>				
+		   </div>
+		</div>
+		
+		<!--箱格门打开  弹框-->
+		<div id="dialog1" class="animated bounceInDown d-layer">
+			<div class="dialog1">
+				<p id="pd1"></p>
+				<p>请放入物品后关门</p>
+				<button class="mui-btn" onclick="refresh()">确定<span class="countdown"></span></button>
+				<div class="ts">系统开始计时,冰箱租赁费率为1元/4小时</div>
+		   </div>
+		</div>
+		
+		<div id="page" class="child-page">
+			<div class="mui-content">
+				<div class="mui-scroll-wrapper">
+	            	<div class="mui-scroll" style="padding:20px 25px;">	
+	            		<p>尊敬的用户:</p>
+						<p>您的钱包总额少于(备用金10元+实际消费），请充值后继续存物</p>
+						<span>注:备用金用于钱包可用余额不够实际消费时的系统扣费</span>
+						<div class="mui-row mui-text-center" style="margin-top: 5px;">
+							<div class="mui-col-xs-6">
+								<button class="mui-btn btn1" onclick="System.openWindow(openWinPath+'/html/mywallet/mywallet.html')">确定</button>
+							</div>
+							<div class="mui-col-xs-6">
+								<button class="mui-btn" onclick="System.closeDivPage('#'+$(this).parents('.child-page').attr('id'))">取消</button>
+							</div>
+						</div>		
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script>document.writeln('<script type="text/javascript" id="componentJs" src="./../../component/component2.0.js" ><\/script>');</script>
+	<script type="text/javascript" src="../../js/postthing/postthing.js" ></script>
+</html>

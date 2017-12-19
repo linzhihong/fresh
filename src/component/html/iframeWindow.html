@@ -1,0 +1,143 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="format-detection" content="telephone=no">
+		<script>document.writeln('<script type="text/javascript" id="componentJs" src="../../component/component.js?'+new Date().getTime()+'" ><\/script>');</script>
+    	<style>
+		</style>
+	</head>
+
+	<body >
+		<header id="header" class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-pull-left mui-icon mui-icon-arrowleft "></a>
+			<a onclick="closeWin()" style="display: block;height: 100%;" class="mui-pull-left"><i class="mui-icon mui-icon-closeempty"></i></a>
+			<h1 class="mui-title" id="leHeardTitle">iframeWindow</h1>
+		</header>
+	</body>
+	<script>
+		var ws=null,embed=null;
+		var appReady = function(){
+			mui.init();
+	        mui.back = function() {
+	        	leBack();
+	        }
+       		createEmbed();
+		}
+		// 创建子Webview
+		function createEmbed(){
+			var styles = {
+				top:"45px",
+				bottom:"0px",
+				hardwareAccelerated:true
+			}
+			ws = plus.webview.currentWebview();
+			document.getElementById('leHeardTitle').innerHTML=ws.title;
+//			var topoffset='45px';
+//			if(plus.navigator.isImmersedStatusbar()){// 兼容immersed状态栏模式
+//				topoffset=(Math.round(plus.navigator.getStatusbarHeight())+45)+'px';
+//			}
+			embed=plus.webview.create(ws.url,'iframeWindow',styles);
+			embed.onloading = function(e){
+				qingqiu();
+			}
+			embed.onloaded = function(e){
+				q = 0;
+			}
+			ws.append(embed);
+			embed.show(); // 显示窗口
+		}
+		
+		var q = 0;
+		function qingqiu(){
+			if(q>1){
+				return;
+			}
+			q++;
+			var xhr = new plus.net.XMLHttpRequest();
+			xhr.onreadystatechange = function () {
+				switch ( xhr.readyState ) {
+					case 0:
+						console.log( "xhr请求已初始化" );
+					break;
+					case 1:
+						console.log( "xhr请求已打开" );
+					break;
+					case 2:
+						console.log( "xhr请求已发送" );
+					break;
+					case 3:
+						console.log( "xhr请求已响应");
+						break;
+					case 4:
+						//alert("xhr.status:"+xhr.status);
+						console.log(xhr.status);
+						if (xhr.status== '416') {//416    登录超时或用户不存在
+							embed.hide();
+							embed.stop();
+							var first = null;
+					        mui.back = function() {
+					            //首次按键，提示‘再按一次退出应用’
+					            if (!first) {
+					                first = new Date().getTime();
+					                mui.toast('再按一次退出应用');
+					                setTimeout(function() {
+					                    first = null;
+					                }, 1000);
+					            } else {
+					                if (new Date().getTime() - first < 1000) {
+					                    plus.runtime.quit();
+					                }
+					            }
+					        };
+							plus.webview.show(plus.webview.currentWebview(),"slide-in-right",300);
+							System.hideLoading();
+							System.alert({msg:'登录超时!',title:'龙旺.享家',btn:['点击重新登录'],callback:function(d){
+								System.clearStorage('l_');
+								System.openWindow(openWinPath+"/login.html");
+							}});
+						}else{
+							if(xhr.status== '404'){
+								embed.hide();
+								embed.stop();
+								plus.webview.show(plus.webview.currentWebview(),"slide-in-right",300);
+								System.hideLoading();
+								System.openWindow(openWinPath+'/error.html');
+							}else{
+								plus.webview.show(plus.webview.currentWebview(),"slide-in-right",300);
+								System.hideLoading();
+							}
+						}
+						break;
+					default :
+						break;
+				}
+			}
+			xhr.open( "get", ws.url );
+			xhr.send();
+		}
+		
+		//后退
+		function leBack(){
+			embed.canBack( function(e){
+				if(e.canBack){
+					embed.back();
+				}else{
+					close(),plus.nativeUI.closeWaiting();
+				}
+			});
+		}
+		
+		//关闭webview
+		function close(){
+			ws.close();
+		}
+		
+		//关闭webview
+		function closeWin(){
+			plus.webview.currentWebview().close();
+		}
+	</script>
+</html>

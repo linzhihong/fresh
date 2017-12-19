@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>冰小柜注册</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="type" content="app">		
+		<link rel="stylesheet" type="text/css" href="../../component/css/mui.min.css"/>
+		<link rel="stylesheet" type="text/css" href="../../component/css/component.css"/>
+		<link rel="stylesheet" type="text/css" href="../../css/common.css"/>
+		<link rel="stylesheet" href="../../css/register/register.css" />
+	</head>
+	<body>
+		<div class="mui-content">
+			<div class="mui-scroll-wrapper">
+	            <div class="mui-scroll">		            
+            		<div class="personal">
+	            		<img src="../../img/pubilc/logo.png"/>
+	            	</div>
+	            	<div style="margin: 20px 15px;" id="form">
+	            		<div class="mui-row">
+	            			<div class="mui-col-xs-3  mui-text-center">
+	            				<span>手机号码</span>
+	            			</div>
+	            			<div class="mui-col-xs-9">
+	            				<input type="tel" name="" id="tel" value="" validate="validateTel" validate-isEmpty="false" />
+	            			</div>
+	            		</div>
+	            		<div class="mui-row">
+	            			<div class="mui-col-xs-3 mui-text-center">
+	            				<span>验&nbsp;&nbsp;证&nbsp;&nbsp;码</span>
+	            			</div>
+	            			
+	            			<div class="mui-col-xs-5">
+	            				<input type="text" maxlength="6" name="" id="yzm" value="" />
+	            			</div>	            		
+	            			<div class="mui-col-xs-4 mui-text-right">
+	            				<button id="hqyzm" class="mui-btn btn1" onclick="getYzm()">获取验证码</button>
+	            			</div>
+	            		</div>
+	            		<div class="mui-row mui-text-center">
+	            			<button class="mui-btn btn" onclick="reg()">完成注册</button>
+	            		</div>
+	            	</div>
+	            	<div class="mui-text-center" id="res">
+	            		<h3>注册成功</h3>
+	            	</div>
+	            </div>
+	        </div>
+		</div>
+	</body>
+	<script>document.writeln('<script type="text/javascript" id="componentJs" src="./../../component/component2.0.js" ><\/script>');</script>
+	<script type="text/javascript" src="../../js/register/register.js" ></script>
+</html>

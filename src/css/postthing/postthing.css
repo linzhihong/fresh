@@ -1,0 +1,168 @@
+body{
+	display: none;
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	background-color:#ffffff;
+}
+.mui-bar{
+	background: #333333;
+	height:45px;
+	line-height: 45px;
+}
+.mui-bar-nav.mui-bar .mui-icon{
+	padding-left: 0px;
+}
+.mui-bar-nav a{
+	color: #FFFFFF;
+	font-size: 14px;
+}
+.mui-title{
+	color: #FE9560;
+	line-height: 50px;
+	font-size: 16px;
+	font-weight: bold;
+}
+.mui-content{
+	background-color: #ffffff;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+}
+.mui-content a{
+	text-decoration: none;
+	font-size: 14px;
+	color: #ffffff;
+}
+.mui-content ul{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	width: 86%;
+	margin: 10px auto;
+}
+.mui-content ul li{
+	border: 1px solid #000; 
+	width: 50%;
+	text-align: center;
+	padding: 10px 0;
+	display: inline-block;
+	float: left;
+}
+.mui-content ul li .sp1{
+	position: relative;
+	top: 10px;
+}
+.mui-content ul li .sp2{
+	position: relative;
+	top: 8px;
+	font-size: 15px;
+	color: #000000;
+	margin-right: -118px;
+}
+.clear{
+	clear: both;
+}
+.mui-content p{
+	font-size: 12px;
+	color: #333333;
+	float: center;
+	margin-top: 20px;
+}
+
+
+/*弹出框dialog*/
+.d-layer{  
+    position: absolute;
+    top: 0px; 
+    left: 0px; 
+    bottom: 0px; 
+    right: 0px; 
+    background: rgba(0,0,0,.5);
+    display: none;
+}
+.dialog{  
+    position: absolute;
+    background: #FFFFFF;
+    width: 64%;
+    height: 105px;
+    top: 35%;
+    left: 18%;
+    padding: 18px;
+    text-align: center;
+}
+.dialog #pd{
+	font-size: 17px;
+	color: #000000;
+}
+.dialog button{
+	width: 90%;
+	line-height: 20px;
+	font-size: 14px;
+	background: #b5b5b6;
+	border:none;
+}
+
+/*弹出框dialog1*/
+.dialog1{  
+    position: absolute;  
+    background: #FFFFFF;
+    width: 74%;
+    height: 145px;
+    top: 35%;
+    left: 13%;
+    padding: 5px;
+    text-align: center;    
+}
+.dialog1 p{
+	font-size: 17px;
+	color: #000000;
+	margin-bottom: 3px;
+}
+.dialog1 #pd1{
+	margin-top: 15px;
+}
+.dialog1 span{
+	font-size: 12px;
+	color: #c3c3c3;
+}
+.dialog1 button{
+	width: 65%;
+    line-height: 18px;
+    font-size: 15px;
+    background: #C0C0C0;
+    color: #333333;
+    margin-top: 8px;
+}
+.dialog1 .countdown{
+	color: #333333;	
+}
+.dialog1 .ts{
+	font-size: 12px;
+	color: #c3c3c3;
+	margin-top: 5px;
+}
+/*page*/
+#page p{
+	font-size: 14px;
+	color: #000000;
+	margin-bottom: 0px;
+	margin-top:0px;
+}
+#page span{
+	font-size: 12px;
+	color: #ff6600;
+}
+#page button{
+	width: 90%;
+	line-height: 15px;
+	font-size: 14px;
+	background: #b6b6b6;
+	border:none;
+	margin-top: 5px;
+}
+#page .btn1{
+	background: #ff6600;
+}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>error</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="type" content="app">
+		<link rel="stylesheet" type="text/css" href="../component/css/mui.min.css"/>
+		<link rel="stylesheet" type="text/css" href="../component/css/component.css" />
+		<link rel="stylesheet" type="text/css" href="../css/common.css"/>
+		<style>
+			body{
+				width: 100%;
+				height: 100%;
+				position: fixed;
+				top: 0;
+				bottom: 0;
+				background-color:#ffffff;
+			}
+			.mui-bar{
+				background: #333333;
+				height:45px;
+				line-height: 45px;
+			}
+			.mui-bar-nav.mui-bar .mui-icon{
+				padding-left: 0px;
+			}
+			.mui-bar-nav a{
+				color: #FFFFFF;
+				font-size: 14px;
+			}
+			.mui-title{
+				color: #FFFFFF;
+				line-height: 45px;
+				font-size: 16px;
+				font-weight: bold;
+			}
+			.mui-content{
+				background-color: #ffffff;
+				width: 100%;
+				height: 100%;
+				overflow: auto;
+			}
+			.mui-content a{
+				text-decoration: none;
+				font-size: 14px;
+				color: #ffffff;
+			}
+			.mui-content .noscore{
+				margin-top: 35%;
+			}
+			.mui-content .noscore img{
+				width: 98px;
+				height: 98px;
+			}
+			.mui-content .noscore p{
+				font-size: 15px;
+				color: #333333;
+				margin-top: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="mui-content">
+			<div class="mui-scroll-wrapper">
+	            <div class="mui-scroll">
+	            	<div class="mui-text-center noscore">
+						<img src="../img/getthing/noscore.png"/>
+						<p>服务器繁忙，请稍后重试!</p>
+					</div>
+	            </div>
+	       </div>	        
+		</div>
+	</body>
+	<script>document.writeln('<script type="text/javascript" id="componentJs" src="./../component/component2.0.js" ><\/script>');</script>	
+	<script>
+		require(["mui"],function(mui){
+			mui.init({
+				swipeBack:true //启用右滑关闭功能
+			});
+		})	
+	</script>
+</html>
