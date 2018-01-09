@@ -2,11 +2,14 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>存物</title>
+		<title>冰小柜</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<meta name="type" content="app">
+		<meta http-equiv="Pragma" content="no-cache">
+		<meta http-equiv="Cache-Control" content="no-cache">
+		<meta http-equiv="expires" content="0">
 		<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>		
 		<link rel="stylesheet" type="text/css" href="../component/css/mui.min.css"/>
 		<link rel="stylesheet" type="text/css" href="../component/css/component.css" />
@@ -14,8 +17,25 @@
 		<link rel="stylesheet" href="../css/postthing/confirmpostthing.css" />
 	</head>
 	<body>
-		
+		<div class="mui-content">
+			<div class="mui-scroll-wrapper mui-text-center" style="top:15px;">
+	            <div class="mui-scroll mui-text-center">		            
+            		 <div class="scanlogo">
+            		 	<img src="../img/postthing/scanlogo.png"/>
+            		 	<div class="mui-text-center scantip">
+            		 		扫描机柜上的二维码
+            		 	</div>
+            		 </div>             		
+	            </div>
+	             <div class="scanbtn">
+        		 	<button class="mui-btn" onclick="scan()">扫一扫</button>
+        		 </div>
+        		 <div class="welcomeuse">
+        		 	欢迎使用冰小柜
+        		 </div>
+	        </div>
+		</div>
 	</body>
-	<script>document.writeln('<script type="text/javascript" id="componentJs" src="./../component/component2.0.js" ><\/script>');</script>
+	<script>document.writeln('<script type="text/javascript" id="componentJs" src="./../component/component2.0.js?'+new Date().getTime()+'" ><\/script>');</script>
 	<script type="text/javascript" src="../js/confirmpostthing/confirmpostthing.js" ></script>	
 </html>

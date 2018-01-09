@@ -62,6 +62,7 @@ function closediv(){
 	$('#dialog1').hide();
 	$('#dialog2').hide();
 }
+
 //		确定推荐
 function confirmRecommend(){
 	closediv();

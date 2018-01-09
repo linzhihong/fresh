@@ -7,6 +7,9 @@
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<meta name="type" content="app">
+		<meta http-equiv="Pragma" content="no-cache">
+		<meta http-equiv="Cache-Control" content="no-cache">
+		<meta http-equiv="expires" content="0">
 		<link rel="stylesheet" type="text/css" href="../../component/css/mui.min.css"/>
 		<link rel="stylesheet" type="text/css" href="../../component/css/component.css"/>
 		<link rel="stylesheet" type="text/css" href="../../css/common.css"/>
@@ -31,7 +34,7 @@
 	       </div>	        
 		</div>
 	</body>
-	<script>document.writeln('<script type="text/javascript" id="componentJs" src="./../../component/component2.0.js" ><\/script>');</script>
+	<script>document.writeln('<script type="text/javascript" id="componentJs" src="./../../component/component2.0.js?'+new Date().getTime()+'" ><\/script>');</script>
 	<script>
 		require(["mui"],function(mui){
 			mui.init({

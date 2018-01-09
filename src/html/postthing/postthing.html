@@ -6,7 +6,10 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
-		<meta name="type" content="app">		
+		<meta name="type" content="app">	
+		<meta http-equiv="Pragma" content="no-cache">
+		<meta http-equiv="Cache-Control" content="no-cache">
+		<meta http-equiv="expires" content="0">
 		<link rel="stylesheet" type="text/css" href="../../component/css/mui.min.css"/>
 		<link rel="stylesheet" type="text/css" href="../../component/css/component.css"/>
 		<link rel="stylesheet" type="text/css" href="../../css/common.css"/>
@@ -16,20 +19,13 @@
 		<div class="mui-content">
 			<div class="mui-scroll-wrapper" style="top:10px;">
 	            <div class="mui-scroll mui-text-center">		            
-            		<!--<ul>
+            		<ul>
             			<script id="myTemplate" component="template" template-type="page"  type="text/html">
 						{{ each list as value i }}
 	            			<a template-setting="{}" onclick="showdg(((({{value.boxStatus}}==0)?{{value.boxNum}}:100)),{{value.boxStatus}},{{value.boxGroupId}})"><li style="background: {{value.color}};"><span class="sp1">{{value.title}}</span><div class="sp2">{{value.boxNum}}</div></li></a>
 	            		{{/each}}
 	            		</script>
-            		</ul> 	  -->
-            		<ul>
-            			<a onclick="showdg()"><li>1</li></a>
-            			<li>2</li>
-            			<li>131</li>
-            			<li>3</li>
-            			<li>1</li>
-            		</ul> 
+            		</ul> 	  
 	            	<div class="clear"></div>
             		<p>请点击绿色区域选择处于"闲置"状态的小柜</p>	                		
 	            </div>
@@ -80,6 +76,6 @@
 			</div>
 		</div>
 	</body>
-	<script>document.writeln('<script type="text/javascript" id="componentJs" src="./../../component/component2.0.js" ><\/script>');</script>
+	<script>document.writeln('<script type="text/javascript" id="componentJs" src="./../../component/component2.0.js?'+new Date().getTime()+'" ><\/script>');</script>
 	<script type="text/javascript" src="../../js/postthing/postthing.js" ></script>
 </html>

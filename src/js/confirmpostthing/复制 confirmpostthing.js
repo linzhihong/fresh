@@ -16,9 +16,9 @@ System.ready(function(){
 		   		    signature: JSON.parse(data.data).signature,// 必填，签名，见附录1
 		   		    jsApiList: ['scanQRCode'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
 		   		});
-//		   		wx.ready(function(){
-//		   			scan();
-//		   		});
+		   		wx.ready(function(){
+		   			scan();
+		   		});
     	    }		
 		}else{
 			alert("服务器出错了，请稍后重试！");
